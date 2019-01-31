@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-cn">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1.变量variable=”value”  等号两边不能有空格打印变量echo $variable or  echo ${variable}current_path=$(“cd $(dirname “$0”)”; pwd) 脚本执行环境unset variable 删除变量 特殊变量$0    当前脚本的文件名$#    传递给脚本或函数的参数个数。$    传递给脚本或函数的所有参数。$@">
+<meta name="keywords" content="linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell编程">
+<meta property="og:url" content="http://yoursite.com/2019/01/31/shell编程/index.html">
+<meta property="og:site_name" content="下水道的包公头">
+<meta property="og:description" content="1.变量variable=”value”  等号两边不能有空格打印变量echo $variable or  echo ${variable}current_path=$(“cd $(dirname “$0”)”; pwd) 脚本执行环境unset variable 删除变量 特殊变量$0    当前脚本的文件名$#    传递给脚本或函数的参数个数。$    传递给脚本或函数的所有参数。$@">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2019-01-31T04:28:04.810Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell编程">
+<meta name="twitter:description" content="1.变量variable=”value”  等号两边不能有空格打印变量echo $variable or  echo ${variable}current_path=$(“cd $(dirname “$0”)”; pwd) 脚本执行环境unset variable 删除变量 特殊变量$0    当前脚本的文件名$#    传递给脚本或函数的参数个数。$    传递给脚本或函数的所有参数。$@">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/31/shell编程/">
+
+
+
+
+
+  <title>shell编程 | 下水道的包公头</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">下水道的包公头</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description"></h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br>
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/31/shell编程/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="下水道的包公头">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="下水道的包公头">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">shell编程</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-01-31T12:23:41+08:00">
+                2019-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="1-变量"><a href="#1-变量" class="headerlink" title="1.变量"></a>1.变量</h1><p>variable=”value”  <strong>等号两边不能有空格</strong><br>打印变量<br>echo $variable or  echo ${variable}<br>current_path=$(“cd $(dirname “$0”)”; pwd) <strong>脚本执行环境</strong><br>unset variable 删除变量</p>
+<h3 id="特殊变量"><a href="#特殊变量" class="headerlink" title="特殊变量"></a>特殊变量</h3><p>$0    当前脚本的文件名<br>$#    传递给脚本或函数的参数个数。<br>$<em>    传递给脚本或函数的所有参数。<br>$@    传递给脚本或函数的所有参数。被双引号(“ “)包含时，与 $</em> 稍有不同，下面将会单独讲到。<br>$?    上个命令的退出状态，或函数的返回值。<br>$$    当前进程的ID<br>$n    传递给脚本或函数的参数。</p>
+<p>终端-&gt; ./test.sh LinuxDaxue .com</p>
+<p>#!/bin/bash  <strong>指定shell; #是注释</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;文件名: $0&quot;</span><br><span class="line">echo &quot;第一个参数 : $1&quot;</span><br><span class="line">echo &quot;第二个参数 : $2&quot;</span><br><span class="line">echo &quot;所有参数: $@&quot;</span><br><span class="line">echo &quot;所有参数: $*&quot;</span><br><span class="line">echo &quot;参数个数: $#&quot;</span><br></pre></td></tr></table></figure></p>
+<p>第一个参数：LinuxDaxue<br>第二个参数：.com<br>所有参数：LinuxDaxue.com<br>所有参数：LinuxDaxue.com<br>参数个数：2</p>
+<h1 id="2-数组"><a href="#2-数组" class="headerlink" title="2. 数组"></a>2. 数组</h1><ol>
+<li>array=(arr1 arr2 arr3 arr4)</li>
+<li>array[1]=arr1<br>array[2]=arr2<br>…..<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">echo $&#123;array[*]&#125;</span><br><span class="line">echo $&#123;array[@]&#125;</span><br><span class="line">打印数组</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h1 id="echo-printf-输出"><a href="#echo-printf-输出" class="headerlink" title="echo printf 输出"></a>echo printf 输出</h1><p>echo ‘原封不动打印’<br>echo “可以添加变量${variable}”<br>echo <code>date</code> 执行date</p>
+<h3 id="重定向"><a href="#重定向" class="headerlink" title="重定向"></a>重定向</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;It is a test&quot; &gt; myfile  myfile中原有内容会被清除</span><br><span class="line">echo &quot;It is a test&quot; &gt;&gt; myfile ，myfile中原有内容不会被清除,追加到文件结尾处</span><br></pre></td></tr></table></figure>
+<h3 id="printf-类似c语言和python合体版-懒得讲了"><a href="#printf-类似c语言和python合体版-懒得讲了" class="headerlink" title="printf 类似c语言和python合体版 懒得讲了"></a>printf 类似c语言和python合体版 懒得讲了</h3><h1 id="3-if-else-for-while-until-case-esac"><a href="#3-if-else-for-while-until-case-esac" class="headerlink" title="3.if else ,for ,while, until, case esac"></a>3.if else ,for ,while, until, case esac</h1><h2 id="if-else"><a href="#if-else" class="headerlink" title="if else"></a>if else</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ 1==1 ]</span><br><span class="line">    echo &apos;fuck 1&apos;</span><br><span class="line">elif [ 2==2 ]    #等于else if</span><br><span class="line">    echo &apos;fuck 2&apos; </span><br><span class="line">else </span><br><span class="line">    echo &apos;fuck nothing&apos;</span><br></pre></td></tr></table></figure>
+<p>##<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">for 变量 in 列表</span><br><span class="line">do</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    ...</span><br><span class="line">    commandN</span><br><span class="line">done</span><br><span class="line"></span><br><span class="line">打印当前目录文件</span><br><span class="line">for file in ./*</span><br><span class="line">do</span><br><span class="line">    echo $file</span><br><span class="line">done</span><br></pre></td></tr></table></figure></p>
+<h2 id="while-如法炮制-until-判断的是假"><a href="#while-如法炮制-until-判断的是假" class="headerlink" title="while 如法炮制 until 判断的是假"></a>while 如法炮制 until 判断的是假</h2><h2 id="case-esac"><a href="#case-esac" class="headerlink" title="case esac"></a>case esac</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">case 值 in</span><br><span class="line">模式1)</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    command3</span><br><span class="line">    ;;</span><br><span class="line">模式2）</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    command3</span><br><span class="line">    ;;</span><br><span class="line">*)</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">    command3</span><br><span class="line">    ;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.gif" alt="下水道的包公头">
+            
+              <p class="site-author-name" itemprop="name">下水道的包公头</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">tags</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-变量"><span class="nav-number">1.</span> <span class="nav-text">1.变量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊变量"><span class="nav-number">1.0.1.</span> <span class="nav-text">特殊变量</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#2-数组"><span class="nav-number">2.</span> <span class="nav-text">2. 数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#echo-printf-输出"><span class="nav-number">3.</span> <span class="nav-text">echo printf 输出</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重定向"><span class="nav-number">3.0.1.</span> <span class="nav-text">重定向</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#printf-类似c语言和python合体版-懒得讲了"><span class="nav-number">3.0.2.</span> <span class="nav-text">printf 类似c语言和python合体版 懒得讲了</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-if-else-for-while-until-case-esac"><span class="nav-number">4.</span> <span class="nav-text">3.if else ,for ,while, until, case esac</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#if-else"><span class="nav-number">4.1.</span> <span class="nav-text">if else</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#while-如法炮制-until-判断的是假"><span class="nav-number">4.2.</span> <span class="nav-text">while 如法炮制 until 判断的是假</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case-esac"><span class="nav-number">4.3.</span> <span class="nav-text">case esac</span></a></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">下水道的包公头</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
